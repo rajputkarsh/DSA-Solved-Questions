@@ -1,22 +1,34 @@
 
 def minimizeJumps(arr, l, h):
 
-    if (h == l):
-        return 0
- 
+    # https://www.youtube.com/watch?v=5Du2iSRrbEw
 
-    if (arr[l] == 0):
-        return float('inf')
- 
-    min = float('inf')
-    for i in range(l + 1, h + 1):
-        if (i < l + arr[l] + 1):
-            jumps = minimizeJumps(arr, i, h)
-            if (jumps != float('inf') and
-                       jumps + 1 < min):
-                min = jumps + 1
- 
-    return min
+    maxReachable = arr[0]
+    step = arr[0]
+    jump = 1
+
+    if len(arr) == 1: 
+        return 0
+    elif len(arr) == 0:
+        return -1
+    else:
+        for i in range(1, len(arr)):
+            
+            if i == len(arr) - 1:
+                return jump
+
+            maxReachable = max(maxReachable, i + arr[i])
+            step -= 1
+
+            if step == 0:
+                jump += 1
+                
+                if i >= maxReachable:
+                    return -1
+                
+                step = maxReachable - i
+
+    return jump
 
 
 if __name__ == '__main__':

@@ -1,4 +1,4 @@
-# this function uses min-heap
+
 class MinHeap:
     def __init__(self, capacity):
         self.storage = [0]*capacity
